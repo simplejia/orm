@@ -53,7 +53,7 @@ type Demo struct {
 ```
 
 ## demo
-[orm_test.go](http://github.com/simplejia/orm/orm_test.go)
+[orm_test.go](http://github.com/simplejia/orm/tree/master/orm_test.go)
 
 ## LICENSE
 orm is licensed under the Apache Licence, Version 2.0
