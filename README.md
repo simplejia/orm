@@ -23,10 +23,15 @@ err = Rows2Strus(rows, &d)
 
 ## 功能
 * 一共提供四种场景的使用方法：
+
 > Rows2Strus, sql.Rows转为struct slice
+
 > Rows2Stru, sql.Rows转为struct，等同db.QueryRow
+
 > Rows2Cnts, sql.Rows转为int slice
+
 > Rows2Cnt, sql.Rows转为int，用于select count(1)操作
+
 * 支持tag: orm，如下：
 ```
 type Demo struct {
