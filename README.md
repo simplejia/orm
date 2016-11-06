@@ -49,13 +49,6 @@ type P struct {
     Name string
 }
 ```
-* 支持snakecase配置，通过设置orm.IsSnakeCase = true，如下：
-```
-type Demo struct {
-    Id int
-    DemoName string // 映射成demo_name字段
-}
-```
 
 ## demo
 [orm_test.go](http://github.com/simplejia/orm/tree/master/orm_test.go)

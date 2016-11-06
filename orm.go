@@ -3,7 +3,6 @@
 package orm
 
 import (
-	"bytes"
 	"reflect"
 	"strings"
 
@@ -11,7 +10,6 @@ import (
 )
 
 var TagName = "orm"
-var IsSnakeCase = false
 
 func getFieldInfo(typ reflect.Type) map[string][]int {
 	if typ.Kind() == reflect.Ptr {
@@ -42,36 +40,12 @@ func getFieldInfo(typ reflect.Type) map[string][]int {
 			tag = f.Name
 		}
 
-		if IsSnakeCase {
-			tag = snakeCase(tag)
-		} else {
-			tag = strings.ToLower(tag)
-		}
+		tag = strings.ToLower(tag)
 
 		finfo[tag] = f.Index
 	}
 
 	return finfo
-}
-
-func snakeCase(src string) string {
-	thisUpper := false
-	prevUpper := false
-
-	buf := bytes.NewBufferString("")
-	for i, v := range src {
-		if v >= 'A' && v <= 'Z' {
-			thisUpper = true
-		} else {
-			thisUpper = false
-		}
-		if i > 0 && thisUpper && !prevUpper {
-			buf.WriteRune('_')
-		}
-		prevUpper = thisUpper
-		buf.WriteRune(v)
-	}
-	return strings.ToLower(buf.String())
 }
 
 func Rows2Strus(rows *sql.Rows, strus interface{}) (err error) {
