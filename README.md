@@ -52,7 +52,3 @@ type P struct {
 
 ## demo
 [orm_test.go](http://github.com/simplejia/orm/tree/master/orm_test.go)
-
-## LICENSE
-orm is licensed under the Apache Licence, Version 2.0
-(http://www.apache.org/licenses/LICENSE-2.0.html)
