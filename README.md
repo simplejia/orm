@@ -1,3 +1,65 @@
+[中文 README](#中文)
+
+
+# [orm](http://github.com/simplejia/orm) (Simple data to object mapping functions combing with sql.Rows)
+## Original Intention
+* database/sql package, sql.Rows returned by Db.Query, according to Rows.Scan, the instance code is as following:
+```
+rows, err := db.Query("SELECT ...")
+defer rows.Close()
+for rows.Next() {
+    var id int
+    var name string
+    err = rows.Scan(&id, &name)
+}
+err = rows.Err()
+...
+```
+In actual coding, we expect as following much more:
+```
+rows, err := db.Query("SELECT ...")
+defer rows.Close()
+var d []*stru
+err = Rows2Strus(rows, &d)
+```
+This is a simple object mapping technology which makes our code much easier.
+
+## Functions
+* Providing usages under the following four conditions:
+
+> Rows2Strus, sql.Rows mapping to struct slice
+
+> Rows2Stru, sql.Rows mapping to struct，like db.QueryRow
+
+> Rows2Cnts, sql.Rows mapping to int slice
+
+> Rows2Cnt, sql.Rows mapping to int，like using `select count(1) ...`
+
+* Supporting tag:orm, as following:
+```
+type Demo struct {
+    Id int
+    DemoName string `orm:"demo_name"` // mapping to demo_name
+}
+```
+* Supporting anonymous member, as following:
+```
+type C struct {
+    Id int
+}
+type P struct {
+    C  // mapping to id field
+    Name string
+}
+```
+
+## demo
+[orm_test.go](http://github.com/simplejia/orm/tree/master/orm_test.go)
+
+---
+中文
+===
+
 # [orm](http://github.com/simplejia/orm) (配合sql.Rows使用的超简单数据到对象映射功能函数)
 ## 实现初衷
 * database/sql包，Db.Query返回的sql.Rows，通过Rows.Scan方式示例代码如下：
